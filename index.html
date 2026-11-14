@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>沖繩 4 日遊</title>
+  <style>
+    body { font-family: "Microsoft JhengHei", sans-serif; background: #f4f7fb; margin: 0; color: #333; }
+    header { background: linear-gradient(135deg, #1fa2a6, #0f7b7f); color: white; text-align: center; padding: 40px 20px; }
+    header h1 { margin: 0 0 8px; }
+    main { max-width: 800px; margin: 30px auto; padding: 0 16px; }
+    .day { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 20px; overflow: hidden; }
+    .day h2 { margin: 0; padding: 16px 20px; background: #e3f5f5; font-size: 1.2em; cursor: pointer; }
+    .day ul { list-style: none; margin: 0; padding: 12px 20px 16px; display: none; }
+    .day.open ul { display: block; }
+    .day li { padding: 8px 0; border-bottom: 1px dashed #ddd; line-height: 1.5; }
+    .day li:last-child { border-bottom: none; }
+    .tag { display: inline-block; min-width: 70px; color: #0f7b7f; font-weight: bold; }
+    .stay { color: #666; font-size: .95em; }
+    footer { text-align: center; padding: 20px; color: #888; font-size: .9em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌺 沖繩 4 日遊</h1>
+    <p>2026/11/16 – 2026/11/19</p>
+  </header>
+
+  <main id="itinerary"></main>
+
+  <footer>最後更新：2026 年 11 月</footer>
+
+  <script>
+    // 想改行程，只要編輯這份資料即可
+    const trip = [
+      { day: "Day 1｜11/16", title: "那霸市區", items: [
+        ["🍽️ 午餐", "吃飽去國際通逛街"],
+        ["🛍️ 購物", "DEGU 藥妝店"],
+        ["🛍️ 購物", "Don Quijote Naha Tsubogawa 唐吉訶德"],
+        ["🍽️ 晚餐", "Buchi Kumojiten（已訂位 20:20）"],
+        ["🏨 住宿", "メルキュール沖縄那覇 Mercure Okinawa Naha"]
+      ]},
+      { day: "Day 2｜11/17", title: "波上宮・達摩寺・PARCO CITY", items: [
+        ["⛩️ 景點", "波上宮、波上之海灘（Naminoue Shrine）"],
+        ["⛩️ 景點", "達摩寺（Sairaiin / Daruma Temple）"],
+        ["🛍️ 購物", "PARCO CITY"],
+        ["🍰 點心", "hoppepan 麵包"],
+        ["🏨 住宿", "メルキュール沖縄那覇 Mercure Okinawa Naha"]
+      ]},
+      { day: "Day 3｜11/18", title: "北部海景", items: [
+        ["🐠 景點", "美麗海水族館（Okinawa Churaumi Aquarium）"],
+        ["🌉 景點", "古宇利大橋、古宇利海灘（Kouri Big Bridge）"],
+        ["💖 景點", "心形岩 Heart Rock"],
+        ["☕ 咖啡", "Okinawa Cerrado Coffee"],
+        ["🥤 飲料", "The Sinmay 黑糖拿鐵"],
+        ["🍖 晚餐", "民宿 BBQ"],
+        ["🏨 住宿", "ニルヤカナヤBISE（ビセ）"]
+      ]},
+      { day: "Day 4｜11/19", title: "南部景點與返程前購物", items: [
+        ["🌊 景點", "萬座毛（Cape Manzamo）"],
+        ["🛍️ 逛街", "美國村（American Village）"],
+        ["🎮 購物", "Pokemon Center Okinawa"],
+        ["☕ 咖啡", "Zhyvago Coffee Works Okinawa"],
+        ["🏨 住宿", "メルキュール沖縄那覇 Mercure Okinawa Naha"]
+      ]}
+    ];
+
+    const container = document.getElementById("itinerary");
+    trip.forEach((d, i) => {
+      const section = document.createElement("section");
+      section.className = "day" + (i === 0 ? " open" : "");
+      section.innerHTML = `
+        <h2>${d.day}｜${d.title}</h2>
+        <ul>${d.items.map(([tag, text]) => `<li><span class="tag">${tag}</span>${text}</li>`).join("")}</ul>`;
+      section.querySelector("h2").addEventListener("click", () => section.classList.toggle("open"));
+      container.appendChild(section);
+    });
+  </script>
+</body>
+</html>
